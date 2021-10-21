@@ -17,6 +17,14 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
 Route::get('/user/{name}', [\App\Http\Controllers\UserController::class, 'show']);
 
+Route::middleware('auth')->group(function () {
+    Route::prefix('app')->group(function () {
+        Route::resource('articles', \App\Http\Controllers\ArticleController::class);
+    });
+});
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 });
+
+require  __DIR__ . '/auth.php';

@@ -9,10 +9,12 @@ use Laravel\Scout\Searchable;
 class Article extends Model
 {
     use HasFactory;
-    use Searchable;
+//    use Searchable;
 
     protected $fillable = [
         'title',
+        'teaser',
+        'user_id'
     ];
 
     public function shouldBeSearchable()
