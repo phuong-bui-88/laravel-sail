@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
+Route::get('/hello', [\App\Http\Controllers\HomeController::class, 'hello']);
+
 Route::get('/user/{name}', [\App\Http\Controllers\UserController::class, 'show']);
+
+Route::get('/cache/{id}', [\App\Http\Controllers\CacheController::class, 'cache']);
 
 Route::middleware('auth')->group(function () {
     Route::prefix('app')->group(function () {
@@ -25,6 +29,10 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
+});
+
+Route::get('/php', function () {
+    return phpinfo();
 });
 
 require  __DIR__ . '/auth.php';

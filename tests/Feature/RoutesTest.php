@@ -11,13 +11,15 @@ use Tests\TestCase;
 class RoutesTest extends TestCase
 {
     use RefreshDatabase;
-//
+
     public function test_home_screen_shows_welcome()
     {
         $response = $this->get('/');
 
         $response->assertViewIs('welcome');
         $response->assertViewHas('pageTitle', 'Homepage');
+        $response->assertSee('Log in');
+        $response->assertSee('Register');
     }
 
     public function test_user_page_existing_user_found()
@@ -27,6 +29,7 @@ class RoutesTest extends TestCase
         $response = $this->get('/user/' . $user->name);
 
         $response->assertOk();
+        $response->assertSessionHasNoErrors();
         $response->assertViewIs('users.show');
     }
 
@@ -71,7 +74,7 @@ class RoutesTest extends TestCase
         $response = $this->get('/app/articles/' . $oldArticle->id . '/edit');
         $response->assertOk();
 
-        $updatedArticle = rand(0, 5);
+        $updatedArticle = 'Updated article title';
         $response = $this->put('/app/articles/' . $oldArticle->id, ['title' => $updatedArticle]);
         $response->assertRedirect('app/articles');
         $this->assertDatabaseMissing(Article::class, ['title' => $oldArticle->title]);
