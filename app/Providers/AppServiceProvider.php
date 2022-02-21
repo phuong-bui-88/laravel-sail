@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Support\AnimalInterface;
+use App\Support\CatHome;
+use App\Support\DogHome;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(AnimalInterface::class, CatHome::class);
     }
 
     /**
@@ -24,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+//        Validator::excludeUnvalidatedArrayKeys();
     }
 }

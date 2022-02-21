@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\User;
+use App\Support\ArticleRepository;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    protected $articleRepo = null;
+
+    public function __construct(ArticleRepository $article)
+    {
+        $this->articleRepo = $article;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +48,10 @@ class ArticleController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        $request->validate(['title' => 'required']);
+        $request->validate([
+            'title' => 'required',
+            'author.name' => 'required'
+        ]);
 
         Article::create(['title' => $request->title, 'teaser' => $user->name, 'user_id' => $user->id]);
 
@@ -78,7 +89,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        $article->update($request->validate(['title' => 'required']));
+        $r = $this->articleRepo->update($article->id, $request->validate(['title' => 'required']));
 
         return redirect()->route('articles.index');
     }

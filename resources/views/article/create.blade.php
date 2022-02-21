@@ -21,6 +21,13 @@
                                  :value="old('title')" required/>
                     </div>
 
+                    <div>
+                        <x-label for="description" :value="__('Name')"/>
+
+                        <x-input class="block mt-1 w-full" type="text" name="author[name]"
+                                 :value="old('name')"/>
+                    </div>
+
                     <x-button class="mt-4">
                         {{ __('Submit') }}
                     </x-button>
