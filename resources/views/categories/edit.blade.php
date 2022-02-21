@@ -1,27 +1,13 @@
 @extends('template')
 
 @section('content')
-    <table class="table">
-        <thead>
-            <td>Name</td>
-            <td>Action</td>
-        </thead>
-        <tbody>
-            @foreach($categories as $category)
-            <tr>
-                <td>{{ $category->name }}</td>
-                <td>
-                    <a href="{{ route('categories.update', [$category->id]) }}" class="btn btn-primary">Edit</a>
-                    <br>
-                    <form action="{{ route('categories.destroy')  }}" method = "PUT">
-                        @csrf
-                        @method('DELETE')
-                        <input class="btn btn-danger" value="Delete"/>
-                    </form>
-                    <br>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <h1> Edit category </h1>
+    <form action="{{ route('categories.update', [$category->id]) }}" method="POST">
+        @method('PUT')
+        @csrf
+        <br>
+        <p>Name: <input type="text" name="name" class="form-text" value="{{ $category->name }}"></p>
+        <br>
+        <input type="submit" class="btn btn-primary" value="Update">
+    </form>
 @endsection

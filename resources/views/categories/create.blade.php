@@ -1,12 +1,13 @@
 @extends('template')
 
 @section('content')
-    <form action="{{ route('categories.store', [$category->id]) }}" method="POST">
+    <h1> Create category </h1>
+
+    <form action="{{ route('categories.store') }}" method="POST">
         @csrf
-        @method('UPDATE')
         <br>
-        Name: <input class="form-text" value="{{ $category->name }}">
+        <p>Name: <input name="name" class="form-text" value=""></p>
         <br>
-        <input type="submit" class="btn btn-primary" value="Update">
+        <input type="submit" class="btn btn-primary" value="Create">
     </form>
 @endsection

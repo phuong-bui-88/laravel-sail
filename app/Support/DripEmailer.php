@@ -6,6 +6,15 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 
+/**
+ * App\Support\DripEmailer
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|DripEmailer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DripEmailer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DripEmailer query()
+ * @mixin \Eloquent
+ * @mixin IdeHelperDripEmailer
+ */
 class DripEmailer extends Model
 {
     public function send(User $user) {

@@ -48,7 +48,10 @@ class ArticleController extends Controller
     {
         /** @var User $user */
         $user = auth()->user();
-        $request->validate(['title' => 'required']);
+        $request->validate([
+            'title' => 'required',
+            'author.name' => 'required'
+        ]);
 
         Article::create(['title' => $request->title, 'teaser' => $user->name, 'user_id' => $user->id]);
 

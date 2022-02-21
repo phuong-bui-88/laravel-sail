@@ -1,24 +1,28 @@
 @extends('template')
 
 @section('content')
-    <a href=" {{ route('categories.create') }}" class="btn btn-info">Create category</a>
+    <a href=" {{ route('products.create') }}" class="btn btn-info">Create product</a>
 
     <table class="table">
         <thead>
             <td>Name</td>
+            <td>Category</td>
+            <td>Price</td>
             <td>Action</td>
         </thead>
         <tbody>
-            @foreach($categories as $category)
+            @foreach($products as $product)
             <tr>
-                <td>{{ $category->name }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->category->name }}</td>
+                <td>{{ $product->price }}</td>
                 <td>
-                    <a href="{{ route('categories.edit', [$category->id]) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('products.edit', [$product->id]) }}" class="btn btn-primary">Edit</a>
 
-                    <form action="{{ route('categories.destroy', [$category->id])  }}" method = "POST" class="d-inline">
+                    <form action="{{ route('products.destroy', [$product->id])  }}" method = "POST" class="d-inline">
                         @method('DELETE')
                         @csrf
-                        <input type="submit" class="btn btn-danger" value="Delete" onclick="confirm('Do you want to delete category?')"/>
+                        <input type="submit" class="btn btn-danger" value="Delete" onclick="confirm('Do you want to delete product?')"/>
                     </form>
                     <br>
                 </td>
